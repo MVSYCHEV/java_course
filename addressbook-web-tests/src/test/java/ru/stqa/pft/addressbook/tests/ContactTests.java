@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.tests;
 
 import java.util.concurrent.TimeUnit;
 
@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
 import org.openqa.selenium.*;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactTests {
   private WebDriver wd;
