@@ -7,6 +7,7 @@ public class ContactModificationTests extends TestBase{
 
   @Test
   public void testContactModification() {
+    app.getNavigationHelper().goToContactPage();
     app.getContactHelper().editContactForm();
     app.getContactHelper().fillContactForm(new ContactData(
             "Mikhail",
@@ -17,7 +18,7 @@ public class ContactModificationTests extends TestBase{
             "Pushkin street",
             "+77777777777",
             "test@testovich.google.org"));
-    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToContactPage();
     app.logout();
   }
