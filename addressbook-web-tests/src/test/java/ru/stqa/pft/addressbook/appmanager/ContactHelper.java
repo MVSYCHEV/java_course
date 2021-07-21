@@ -41,8 +41,12 @@ public class ContactHelper extends BaseHelper{
     click(By.id("MassCB"));
   }
 
-  public void deleteSelectedContact() {
+  public void deleteSelectedContactFromMainPage() {
     click(By.xpath("//input[@value='Delete']"));
+  }
+
+  public void deleteSelectedContactFromEditPage() {
+    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 
   public void closeAlert() {
