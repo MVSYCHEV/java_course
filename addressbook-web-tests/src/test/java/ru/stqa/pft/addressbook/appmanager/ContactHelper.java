@@ -37,20 +37,16 @@ public class ContactHelper extends BaseHelper{
     click(By.xpath("//img[@alt='Edit']"));
   }
 
-  public void selectAllContact() {
-    click(By.id("MassCB"));
-  }
-
-  public void deleteSelectedContactFromMainPage() {
+  public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete']"));
-  }
-
-  public void deleteSelectedContactFromEditPage() {
-    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 
   public void closeAlert() {
     wd.switchTo().alert().accept();
+  }
+
+  public void selectContact() {
+    click(By.xpath("(//input[@name='selected[]'])"));
   }
 
   public void submitContactModification() {
