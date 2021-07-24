@@ -17,7 +17,9 @@ public class ContactModificationTests extends TestBase{
             "OOO",
             "Pushkin street",
             "+77777777777",
-            "test@testovich.google.org"));
+            "test@testovich.google.org",
+            null),
+            false);
     app.getContactHelper().submitContactModification();
     app.getContactHelper().returnToContactPage();
     app.logout();
