@@ -77,13 +77,15 @@ public class ContactData {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    ContactData contactData = (ContactData) o;
-    return Objects.equals(name, contactData.name) && Objects.equals(lastname, contactData.lastname);
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(name, that.name) &&
+            Objects.equals(lastname, that.lastname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, lastname);
+    return Objects.hash(id, name, lastname);
   }
 
   public String getName() {
