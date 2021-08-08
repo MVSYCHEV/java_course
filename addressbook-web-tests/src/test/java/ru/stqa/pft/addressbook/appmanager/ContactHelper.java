@@ -67,25 +67,31 @@ public class ContactHelper extends BaseHelper {
     click(By.name("update"));
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
     returnToContactPage();
   }
 
-  public void modifyContact(int index, ContactData contact) {
+  public void modify(int index, ContactData contact) {
     editContactForm(index);
     fillContactForm(contact, false);
     submitContactModification();
     returnToContactPage();
   }
 
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    closeAlert();
+  }
+
   public boolean isThereIsContact() {
     return isElementPresent(By.xpath("(//input[@name='selected[]'])"));
   }
 
-  public List<ContactData> getContactsList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements((By.cssSelector("tr[name=\"entry\"]")));
     for (WebElement element : elements) {

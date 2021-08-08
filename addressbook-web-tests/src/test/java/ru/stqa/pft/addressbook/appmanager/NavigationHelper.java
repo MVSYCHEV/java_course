@@ -11,7 +11,7 @@ public class NavigationHelper extends BaseHelper {
 
   }
 
-  public void goToGroupPage() {
+  public void groupPage() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Groups")
             && isElementPresent(By.name("new"))) {
@@ -25,7 +25,7 @@ public class NavigationHelper extends BaseHelper {
     js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
   }
 
-  public void goToContactPage() {
+  public void contactPage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
