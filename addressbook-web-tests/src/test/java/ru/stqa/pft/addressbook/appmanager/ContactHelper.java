@@ -74,6 +74,13 @@ public class ContactHelper extends BaseHelper {
     returnToContactPage();
   }
 
+  public void modifyContact(int index, ContactData contact) {
+    editContactForm(index);
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToContactPage();
+  }
+
   public boolean isThereIsContact() {
     return isElementPresent(By.xpath("(//input[@name='selected[]'])"));
   }
