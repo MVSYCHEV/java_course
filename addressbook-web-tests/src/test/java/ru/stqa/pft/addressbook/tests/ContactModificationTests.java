@@ -10,15 +10,8 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-  private final ContactData contact = new ContactData("Mikhail",
-          "Sychev",
-          "Testovich",
-          "RogaAndCopyta",
-          "OOO",
-          "Pushkin street",
-          "+77777777777",
-          "test@testovich.google.org",
-          "test123");
+  private final ContactData contact = new ContactData().withName("Mikhail").withLastname("Sychev").withNickname("Testovich").withTitle("RogaAndCopyta")
+          .withCompany("OOO").withAddress("Pushkin street").withPhone("+77777777777").withEmail("test@testovich.google.org").withGroup("test123");
 
   @BeforeMethod
   public void ensurePreconditions() {
