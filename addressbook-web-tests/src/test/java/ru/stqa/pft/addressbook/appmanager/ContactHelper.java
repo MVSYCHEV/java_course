@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -142,5 +143,32 @@ public class ContactHelper extends BaseHelper {
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withName(name).withLastname(lastname)
             .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone).withAddress(address).withEmail(email).withEmail2(email2).withEmail3(email3);
+  }
+
+  public void selectGroup(GroupData group) {
+    wd.findElement(By.xpath(String.format("//select[@name='to_group']/option[@value='%s']", group.getId()))).click();
+  }
+  public void selectContactWithOutGroup(ContactData contact) {
+    click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+  }
+  public void removeContactFromGroup() {
+    click(By.name("remove"));
+    contactCache = null;
+//    returnToContactPage();
+  }
+
+  public void getGroupData(GroupData groupData) {
+    click(By.xpath(String.format("//select[@name='group']/option[text() = '%s']", groupData.getName())));;
+  }
+
+  public void selectContactWithoutGroup(ContactData contact) {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[none]");
+    click(By.xpath(String.format("//input[@type='checkbox']", contact.getId())));
+  }
+
+  public void addContactToGroup() {
+    click(By.name("add"));
+    contactCache = null;
+//    returnToContactPage();
   }
 }
