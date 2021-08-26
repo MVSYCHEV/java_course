@@ -7,7 +7,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -26,46 +28,43 @@ public class ContactData {
   @Column(name = "lastname")
   private String lastname;
 
-  @Column(name="nickname")
+  @Column(name = "nickname")
   private String nickname;
 
-  @Column(name="title")
+  @Column(name = "title")
   private String title;
 
-  @Column(name="company")
+  @Column(name = "company")
   private String company;
 
   @Expose
-  @Column(name="address")
-  @Type(type="text")
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
 
   @Column(name = "mobile")
-  @Type(type="text")
+  @Type(type = "text")
   private String mobilePhone;
 
   @Column(name = "work")
-  @Type(type="text")
+  @Type(type = "text")
   private String workPhone;
 
   @Column(name = "home")
-  @Type(type="text")
+  @Type(type = "text")
   private String homePhone;
 
-  @Column(name="email")
-  @Type(type="text")
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
 
-  @Column(name="email2")
-  @Type(type="text")
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
 
-  @Column(name="email3")
-  @Type(type="text")
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
-
-  @Transient
-  private String group;
 
   @Transient
   private String allPhones;
@@ -73,9 +72,15 @@ public class ContactData {
   @Transient
   private String allEmails;
 
-  @Column(name="photo")
-  @Type(type="text")
+  @Column(name = "photo")
+  @Type(type = "text")
   private String photo;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<>();
 
   public File getPhoto() {
     if (photo != null) {
@@ -181,8 +186,8 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
     return this;
   }
 
@@ -251,11 +256,11 @@ public class ContactData {
     return email;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   public int getId() {
     return id;
+  }
+
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 }
