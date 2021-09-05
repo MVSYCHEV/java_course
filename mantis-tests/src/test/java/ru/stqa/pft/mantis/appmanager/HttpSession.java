@@ -19,18 +19,18 @@ public class HttpSession {
   private CloseableHttpClient httpClient;
   private ApplicationManager app;
 
-  public HttpSession(ApplicationManager app){
+  public HttpSession(ApplicationManager app) {
     this.app = app;
     httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
   }
 
-  public boolean login (String username,String password) throws Exception {
-    HttpPost post=new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
+  public boolean login(String username, String password) throws Exception {
+    HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
     List<NameValuePair> params = new ArrayList<>();
     params.add(new BasicNameValuePair("username", username));
     params.add(new BasicNameValuePair("password", password));
-    params.add(new BasicNameValuePair("secure_session","on"));
-    params.add(new BasicNameValuePair("return","index.php"));
+    params.add(new BasicNameValuePair("secure_session", "on"));
+    params.add(new BasicNameValuePair("return", "index.php"));
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpClient.execute(post);
     String body = getTextForm(response);
@@ -44,11 +44,10 @@ public class HttpSession {
     return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
 
-  private String getTextForm(CloseableHttpResponse response) throws Exception{
-    try{
+  private String getTextForm(CloseableHttpResponse response) throws Exception {
+    try {
       return EntityUtils.toString(response.getEntity());
-    }
-    finally {
+    } finally {
       response.close();
     }
   }
